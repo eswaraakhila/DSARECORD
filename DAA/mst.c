@@ -58,3 +58,32 @@ void primMST(int graph[V][V])
         // Pick minimum key vertex 
         int u = minKey(key, visited); 
         visited[u] = 1;
+  // Update adjacent vertices for the picked vertex u 
+        for (int v = 0; v < V; v++) 
+        { 
+            //(u, v) is an edge and v is not visited and weight of (u, v) is smaller 
+than key[v] 
+            if (graph[u][v] && !visited[v] && graph[u][v] < key[v]) 
+            { 
+                parent[v] = u; 
+                key[v] = graph[u][v]; 
+            } 
+        } 
+    } 
+    printPrimMST(parent, graph); 
+} 
+ 
+int main() 
+{ 
+    // Graph for Prim's (Adjacency Matrix) 
+    int graph[V][V] = { 
+        {0, 2, 3, 0, 0}, 
+        {2, 0, 5, 3, 0}, 
+        {3, 5, 0, 0, 4}, 
+        {0, 3, 0, 0, 2}, 
+        {0, 0, 4, 2, 0}}; 
+ 
+    // Run Prim's Algorithm 
+    primMST(graph); 
+    return 0; 
+}
